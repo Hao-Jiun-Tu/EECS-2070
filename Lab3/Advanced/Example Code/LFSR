@@ -1,0 +1,19 @@
+`timescale 1ns / 1ps
+
+module LFSR (clk, rst_n, out, DFF);
+input clk, rst_n;
+output out;
+output [4:0] DFF;
+reg [4:0] DFF;
+wire DFF0;
+always @(posedge clk) begin
+    if(!rst_n) 
+        DFF <= 5'b01000;
+     else begin
+        DFF[4:1] <= DFF[3:0];
+        DFF[0] <= DFF0;
+     end
+end
+assign DFF0 = DFF[4] ^ DFF[2];
+assign out = DFF[4];
+endmodule
